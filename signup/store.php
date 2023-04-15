@@ -1,66 +1,23 @@
 <?php
-	$server = "localhost";
-	$username = "username";
-	$password = "password";
-	$dbname = "signupdatabase"
-	$conn = new mysqli("$server", "$username", "$password", "$dbname");
-	if($conn->connect_error){
-		die("Connection Failed: ".$conn->connect_error);
-	}
-	$fullname = $username = $email = $phoneno = $password = $repeatpassword = "";
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		$fullname = test_input($_POST["fullname"]);
-		$username = test_input($_POST["username"]);
-		$email = test_input($_POST["email"]);
-		$phoneno = test_input($_POST["phoneno"]);
-		$password = test_input($_POST["password"]);
-		$repeatpassword = test_input($_POST["repeatpassword"]);
+	$localhost = "localhost";
+	$username = "root";
+	$passwrd = "";
+	$dbname = "signupdatabase";
+	$connect = new mysqli($localhost, $username, $passwrd, $dbname);
 
-		if($fullname != "" && $username != "" && $email != "" && $phoneno != "" && $password != "" && $repeatpassword != ""){
-			if(!preg_match("/^[a-zA-Z'-]+$/", $fullname)){
-				echo"Invalid name";
-			}
-			else if(preg_match('/^\w{5,}$/', $username)) { 
-				echo"Invalid username";
-			}
-			else if(!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)){
-				echo"Invalid email";
-			}
-			else if($_POST["password"] == $_POST["repeatpassword"]){
-				echo"Password Not Match";
-			}
-			else if($_POST["password"] == $_POST["repeatpassword"]){
-				if(strlen($_POST["password"]) <= 8){
-					echo"Your password must contain at least 8 characters";
-				}
-				else if(!preg_match("#[A-Z]+#",$password)){
-					echo"Your password must contain at least 1 capital letter";
-				}
-				else if(!preg_match("#[a-z]+#",$password)){
-					echo"Your password must contain at least 1 small letter";
-				}
-				else if(!preg_match("#[0-9]+#",$password)){
-					echo"Your password must contain at least 1 number";
-				}
-				else{
-					echo"Correct format";
-				}
-			}
-			else{
-				$query = "INSERT INTO STORE VALUES('$fullname', '$username', '$email', '$phoneno', '$password', '$repeatpassword');
-				$data = mysqli_query($conn, $query);
-
-				if($data){
-					echo"Data Updated!!!";
-				}
-				else{
-					echo"Failed";
-				}
-			}
-		}
-		else{
-			echo"Please fill in the required fields";
-		}
+	$fullname = $_POST['fullname'];
+	$username = $_POST['username'];
+	$phoneno = $_POST['phoneno'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$repeatpassword = $_POST['repeatpassword'];
+	if(!empty($fullname) && !empty($username) && !empty($phoneno) && !empty($email) && !empty($password) && !empty($repeatpassword) && $password === $repeatpassword ){
+		$query = "INSERT INTO STORE VALUES('$fullname', '$username', '$phoneno', '$email', '$password', '$repeatpassword')";
+		$data = mysqli_query($connect, $query);
+		echo("Successfully signed up");
+		$connect -> close();
 	}
-	$conn->close();
+	else{
+		echo"Password do not match, try again";
+	}
 ?>
