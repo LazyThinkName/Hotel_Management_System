@@ -1,18 +1,18 @@
 form{ 
  background-color:lightblue;
  padding: 15px;
- padding-top: 2px;
+ padding-top: 1px;
  border-radius: 5px; 
 }
 
 body{
   margin: 0 auto;
-  height: 50vh;
-  width: 100vw;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 50vh;
+  width: 100vw;
 }
 
 .container{
@@ -20,6 +20,11 @@ body{
   border-radius: 5px; 
   width: 350px;
   height: 100px;
+}
+
+input[type="text"], [type="password"], [type="email"], [type="tel"]{
+  width:250px;
+  height:20px;
 }
 
 button{
