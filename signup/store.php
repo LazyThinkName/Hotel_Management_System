@@ -11,7 +11,7 @@
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$repeatpassword = $_POST['repeatpassword'];
-	if(!empty($fullname) && !empty($username) && !empty($phoneno) && !empty($email) && !empty($password) && !empty($repeatpassword) && $password === $repeatpassword ){
+	if($password === $repeatpassword ){
 		$query = "INSERT INTO STORE VALUES('$fullname', '$username', '$phoneno', '$email', '$password', '$repeatpassword')";
 		$data = mysqli_query($connect, $query);
 		echo("Successfully signed up");
