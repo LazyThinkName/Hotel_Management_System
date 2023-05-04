@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `add room`
+-- Table structure for table `add_room`
 --
 
-CREATE TABLE `add room` (
+CREATE TABLE `add_room` (
   `no` int(200) NOT NULL,
   `roomtype` varchar(40) NOT NULL,
   `roomnumber` varchar(5) NOT NULL,
