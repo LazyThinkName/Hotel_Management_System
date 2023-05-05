@@ -68,7 +68,7 @@
           if (!preg_match('/^\d+(\.\d{1,2})?$/', $price) && $price < 0) {
             echo"<p class='err'>Please enter the room price!</p>";
           }
-          if (!preg_match('/^[1-9]|10$/', $unit)) {
+          if (!preg_match('/^[1-9]{1}$/', $unit) && !preg_match('/^10$/', $unit)) {
           echo"<p class='err'>Our hotel only have unit range from 1 to 10.</p>";
           }
         }
