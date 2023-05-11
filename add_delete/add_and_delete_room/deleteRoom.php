@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 
@@ -12,13 +12,14 @@
 		<input type="submit" name="Delete">
 	</form>
 
-
-	<?php
+</body>
+</html> -->
+<?php
     //connect to the database
     $server = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "room";
+    $dbname = "hotel_management";
 
     //create connection
     $mysqli = mysqli_connect($server, $username, $password, $dbname);
@@ -33,16 +34,18 @@
     $roomnumber = $_POST['roomnumber'];
     
     // Delete the room from the database
-    $sql = "DELETE FROM add_room WHERE roomnumber = $roomnumber";
     
-    if (mysqli_query($mysqli, $sql)) {
+    $sql = "SELECT * FROM room WHERE roomnumber = '$roomnumber'";
+    $result = mysqli_query($mysqli, $sql);
+    
+    if (mysqli_num_rows($result)>0) {
+        $sql = "DELETE FROM room WHERE roomnumber = '$roomnumber'";
+        mysqli_query($mysqli, $sql);
         echo "Room deleted successfully.";
     } else {
-        echo "Error deleting room: " . mysqli_error($mysqli);
+        echo "Room " . $roomnumber." not found";
     }
 }
 
 
     ?>
-</body>
-</html>

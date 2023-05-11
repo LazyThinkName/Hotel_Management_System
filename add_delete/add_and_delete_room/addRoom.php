@@ -36,7 +36,7 @@
     $server = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "room";
+    $dbname = "hotel_management";
 
     //create connection
     $mysqli = mysqli_connect($server, $username, $password, $dbname);
@@ -74,7 +74,7 @@
         }
         //submit when form has no incorrect input
         else{
-          $addroom = "INSERT INTO add_room VALUES('$roomtype', '$roomnumber', '$details', '$price', '$unit')";
+          $addroom = "INSERT INTO room (roomtype, roomnumber, details, price, unit) VALUES('$roomtype', '$roomnumber', '$details', '$price', '$unit')";
 
           if(mysqli_query($mysqli, $addroom)){
               echo"<p>Room successfully added to database!!</p>";
