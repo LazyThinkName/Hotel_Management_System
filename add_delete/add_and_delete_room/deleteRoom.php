@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -6,6 +6,8 @@
 
 <body>
 	<form method="post">
+        <a href="index.php">Back</a>
+        <br>
 		<label for="roomnumber">Room Number:</label>
 		<input type="text" name="roomnumber" required>
 		<br>
@@ -13,7 +15,7 @@
 	</form>
 
 </body>
-</html> -->
+</html>
 <?php
     //connect to the database
     $server = "localhost";

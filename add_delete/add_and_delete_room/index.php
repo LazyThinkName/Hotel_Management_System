@@ -7,6 +7,7 @@
 	<a href="../../html/homepageA.html"><button>Back</button></a>
 	<div class="table">		
 	<a href="addRoom.php"><button>+Add Room</button></a><br><br>
+	<a href="deleteRoom.php"><button>-Delete Room</button></a><br><br>
 	<!-- <a href="deleteRoom.php"><button>-Delete Room</button></a><br><br> -->
 	<table>
 		<tr>
