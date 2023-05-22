@@ -44,3 +44,10 @@ body {
   right:0;
   color:#FFF;
 }
+
+.profile-area {
+  display: none; /* Hide the profile area by default */
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-top: 20px;
+}

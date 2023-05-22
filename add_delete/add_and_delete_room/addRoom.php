@@ -1,3 +1,20 @@
+<?php
+session_start();
+// Retrieve the username from the query parameters or session variable
+if (isset($_GET['username'])) {
+    $username = $_GET['username'];
+    $_SESSION['username'] = $username;
+} else if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+} else {
+    // Username not found in the query parameters or session, handle the case accordingly
+    // For example, redirect the user to the login page
+    header("location: ../../index.php");
+    exit();
+}
+?>
+
+
 <!DOCTYPE HTML>
 <head>
 <link href="addRoom.css" rel="stylesheet" type="text/css">
@@ -52,7 +69,7 @@
         $details = trim($_POST["detail"]);
         $price = trim($_POST["roomprice"]);
         $unit = trim($_POST["roomunit"]);
-        $checkroomnumber = "SELECT * FROM add_room WHERE roomnumber = '$roomnumber'";
+        $checkroomnumber = "SELECT * FROM room WHERE roomnumber = '$roomnumber'";
         $result = mysqli_query($mysqli, $checkroomnumber);
         if(empty($roomnumber) || empty($details) || empty($price) ||
         empty($unit) || !preg_match("/^[0-9]{3}$/", $roomnumber) || (!preg_match('/^\d+(\.\d{1,2})?$/', $price) && $price < 0)  || !preg_match('/^[1-9]|10$/', $unit) || mysqli_num_rows($result) > 0){    
@@ -74,7 +91,15 @@
         }
         //submit when form has no incorrect input
         else{
-          $addroom = "INSERT INTO room (roomtype, roomnumber, details, price, unit) VALUES('$roomtype', '$roomnumber', '$details', '$price', '$unit')";
+          $maxID = "SELECT roomID FROM room WHERE roomID = (SELECT max(roomID) FROM room)";
+          $result = $mysqli->query($maxID);
+          if ($result){
+            $maxID = $result->fetch_assoc();
+            $maxRoomID = $maxID['roomID'];
+
+            $id = $maxRoomID + 1;
+          }
+          $addroom = "INSERT INTO room (roomID, roomNumber, roomType, detail, price, unit) VALUES('$id','$roomnumber', '$roomtype', '$details', '$price', '$unit')";
 
           if(mysqli_query($mysqli, $addroom)){
               echo"<p>Room successfully added to database!!</p>";
@@ -87,7 +112,16 @@
     //close connection
     $mysqli->close();
     ?>
+    <script>
+        // Retrieve the username from the query parameters
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const username = urlParams.get('username');
 
+        // Use the username as needed
+        console.log('Username:', username);
+        // You can update the UI or perform other actions based on the username
+    </script>
   </body>
 </html>
 
